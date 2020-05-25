@@ -1,6 +1,8 @@
 package code.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "knigi")
@@ -11,14 +13,15 @@ public class Book {
     private String title;
     @ManyToOne
     private Author author;
-    @OneToOne
-    private Genre genre;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "knigi_id")
+    private List<Genre> genre = new ArrayList<>();
 
-    public Genre getGenre() {
+    public List<Genre> getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(List<Genre> genre) {
         this.genre = genre;
     }
 

@@ -57,8 +57,9 @@ public class BookDaoImpl implements BookDao {
     @Override
     public List<Book> getBooksByGenre(Genre genre) {
         try(Session session = HibernateUtil.getFactory().openSession()) {
-            Query query = session.createQuery("from Book where genre = :a");
-            query.setParameter("a", genre);
+            Query query = session.createQuery("From Book b JOIN fetch b.genre JOIN fetch b.author "
+                    + "WHERE :g member b.genre", Book.class);
+            query.setParameter("g", genre);
             return query.list();
 
         } catch (Exception e) {

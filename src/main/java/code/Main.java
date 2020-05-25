@@ -10,6 +10,9 @@ import code.model.Author;
 import code.model.Book;
 import code.model.Genre;
 
+import java.util.Collections;
+import java.util.List;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -35,27 +38,23 @@ public class Main {
         genreDao.create(genre1);
         genreDao.create(genre2);
 
+
         Book book1 = new Book();
         book1.setTitle("KingKong");
         book1.setAuthor(author1);
-        book1.setGenre(genre1);
+        book1.setGenre(List.of(genre1));
 
         Book book2 = new Book();
         book2.setTitle("Lords");
         book2.setAuthor(author2);
-        book2.setGenre(genre2);
-
-        Book book3 = new Book();
-        book3.setTitle("Karmelita");
-        book3.setAuthor(author2);
-
+        book2.setGenre(List.of(genre2,genre1));
 
         bookDao.create(book1);
         bookDao.create(book2);
-        bookDao.create(book3);
+
 
        // bookDao.getBooksByAuthor(author2).forEach(System.out::println);
-        bookDao.getBooksByGenre(genre1).forEach(System.out::println);
+       // bookDao.getBooksByGenre(genre1).forEach(System.out::println);
 
 
     }
